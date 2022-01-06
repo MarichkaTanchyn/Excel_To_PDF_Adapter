@@ -33,17 +33,19 @@ public class FormatHandler extends Handler {
 
     }
     private void addTableHeader(PdfPTable table) {
-        Stream.of(list.get(0).get(0),list.get(0).get(1),list.get(0).get(2),list.get(0).get(3))
-                .forEach(columnTitle -> {
-                    PdfPCell header = new PdfPCell();
-                    header.setPadding(2.5f);
-                    header.setBorderWidth(1);
-                    header.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    header.setPhrase(new Phrase(columnTitle));
-                    table.addCell(header);
-                });
+        list.get(0).forEach(columnTitle -> addCellTableHeader(columnTitle, table));
         list.remove(0);
     }
+
+    private void addCellTableHeader(String columnTitle,PdfPTable table) {
+        PdfPCell header = new PdfPCell();
+        header.setPadding(2.5f);
+        header.setBorderWidth(1);
+        header.setHorizontalAlignment(Element.ALIGN_CENTER);
+        header.setPhrase(new Phrase(columnTitle));
+        table.addCell(header);
+    }
+
     private void addRows(PdfPTable table) {
         for (List<String> list : list) {
             for (String item: list) {
