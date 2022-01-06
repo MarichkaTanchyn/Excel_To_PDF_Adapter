@@ -1,4 +1,4 @@
-package handler.example;
+package handler;
 
 public abstract class Handler {
 
